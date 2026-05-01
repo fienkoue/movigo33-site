@@ -1,0 +1,50 @@
+{
+  "accessoires_animaux": [
+    {
+      "id": "collier-anti-aboiement",
+      "nom": "Collier anti-aboiement",
+      "slug": "collier-anti-aboiement",
+      "prix": 29.99,
+      "image_file": "collier.jpg",
+      "description": "Collier anti-aboiement rechargeable, pratique pour accompagner l'éducation du chien.",
+      "details": [
+        "Rechargeable USB",
+        "Étanche IP67",
+        "3 modes de correction"
+      ],
+      "url": ""
+    }
+  ],
+  "maison": [
+    {
+      "id": "poubelle-papier",
+      "nom": "Poubelle de papier",
+      "slug": "poubelle-de-papier",
+      "prix": 3.99,
+      "image_file": "trash.jpg",
+      "description": "Accessoire maison compact et pratique pour le bureau ou la chambre.",
+      "details": [
+        "Compacte",
+        "Légère",
+        "Usage quotidien"
+      ],
+      "url": ""
+    }
+  ],
+  "auto": [
+    {
+      "id": "disque-a",
+      "nom": "Disque A jeune conducteur",
+      "slug": "disque-a-jeune-conducteur",
+      "prix": 2.99,
+      "image_file": "discA.jpg",
+      "description": "Disque A magnétique pour jeunes conducteurs.",
+      "details": [
+        "Magnétique",
+        "Conforme",
+        "Facile à poser"
+      ],
+      "url": ""
+    }
+  ]
+}

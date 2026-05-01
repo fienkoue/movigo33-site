@@ -1,0 +1,27 @@
+[
+  {
+    "slug": "bordeaux",
+    "nom": "Bordeaux",
+    "intro": "Location d’utilitaire à Bordeaux pour déménagement, transport de meubles ou besoin ponctuel."
+  },
+  {
+    "slug": "talence",
+    "nom": "Talence",
+    "intro": "Louez un utilitaire à Talence rapidement, avec prix direct et réservation simple."
+  },
+  {
+    "slug": "pessac",
+    "nom": "Pessac",
+    "intro": "Solution pratique pour louer un camion ou un utilitaire à Pessac."
+  },
+  {
+    "slug": "merignac",
+    "nom": "Mérignac",
+    "intro": "Location utilitaire à Mérignac pour particuliers et professionnels."
+  },
+  {
+    "slug": "begles",
+    "nom": "Bègles",
+    "intro": "Location d’utilitaire à Bègles proche Bordeaux, idéale pour un déménagement."
+  }
+]
