@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="contenu" class="container">
+  <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> / Véhicules / {{ vehicule.nom }}</nav>
+  <h1>Location {{ vehicule.nom }} à {{ vehicule.ville }}</h1>
+  <p class="lead">Utilitaire ou véhicule disponible autour de Bordeaux avec réservation simple.</p>
+  <img loading="lazy" src="/static/images/{{ vehicule.image_file }}" alt="Location {{ vehicule.nom }} à {{ vehicule.ville }}" class="detail-image" width="900" height="600">
+  <p><strong>Tarif indicatif :</strong> dès {{ vehicule.prix }} €/jour</p>
+  <p>{{ vehicule.description }}</p>
+  {% if vehicule.details %}
+  <h2>Caractéristiques</h2>
+  <ul>{% for d in vehicule.details %}<li>{{ d }}</li>{% endfor %}</ul>
+  {% endif %}
+  <h2>Usages conseillés</h2>
+  <p>Ce véhicule convient pour les déménagements, transports d’objets volumineux, trajets professionnels et besoins ponctuels autour de {{ vehicule.ville }} et Bordeaux Métropole.</p>
+  {% if vehicule.url %}<a class="btn" target="_blank" rel="nofollow sponsored noopener" href="{{ vehicule.url }}">Réserver ce véhicule</a>{% endif %}
+  <a class="btn dark" href="/">Retour à l’accueil</a>
+</main>
+{% endblock %}

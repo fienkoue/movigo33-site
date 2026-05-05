@@ -1,0 +1,70 @@
+{
+  "utilitaires": [
+    {
+      "id": "peugeot-boxer-2015",
+      "nom": "Peugeot Boxer 2015",
+      "slug": "peugeot-boxer-2015",
+      "ville": "Talence",
+      "prix": 54,
+      "image_file": "boxer.jpg",
+      "description": "Utilitaire grand volume idéal pour les déménagements, transports de meubles et trajets professionnels autour de Bordeaux.",
+      "details": [
+        "3 places",
+        "Diesel",
+        "Boîte manuelle",
+        "Grand volume",
+        "Idéal déménagement"
+      ],
+      "url": "https://fr.getaround.com/location-voiture/talence/peugeot-boxer-1794073"
+    },
+    {
+      "id": "citroen-jumper-2016",
+      "nom": "Citroën Jumper 2016",
+      "slug": "citroen-jumper-2016",
+      "ville": "Bègles",
+      "prix": 55,
+      "image_file": "jumper.jpg",
+      "description": "Utilitaire pratique pour déménagements, transport de cartons, meubles et matériel dans la métropole bordelaise.",
+      "details": [
+        "3 places",
+        "Diesel",
+        "Boîte manuelle",
+        "TVA récupérable"
+      ],
+      "url": "https://fr.getaround.com/location-voiture/begles/citroen-jumper-1677445"
+    },
+    {
+      "id": "renault-kangoo-2017",
+      "nom": "Renault Kangoo 2017",
+      "slug": "renault-kangoo-2017",
+      "ville": "Bègles",
+      "prix": 45,
+      "image_file": "kangoo.jpg",
+      "description": "Petit utilitaire économique pour courses volumineuses, transport léger et petits déménagements.",
+      "details": [
+        "2 places",
+        "Diesel",
+        "Format compact",
+        "Facile à stationner"
+      ],
+      "url": "https://fr.getaround.com/location-voiture/begles/renault-kangoo-express-1670107"
+    }
+  ],
+  "tourisme": [
+    {
+      "id": "suzuki-splash-2014",
+      "nom": "Suzuki Splash 2014",
+      "slug": "suzuki-splash-2014",
+      "ville": "Bègles",
+      "prix": 35,
+      "image_file": "splash.jpg",
+      "description": "Citadine économique pour déplacements urbains autour de Bordeaux.",
+      "details": [
+        "Essence",
+        "Citadine",
+        "Économique"
+      ],
+      "url": "https://fr.getaround.com/location-voiture/begles/suzuki-splash-1670110"
+    }
+  ]
+}

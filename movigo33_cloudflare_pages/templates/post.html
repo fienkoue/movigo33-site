@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="contenu" class="container article">
+  <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> / Blog / {{ post.titre }}</nav>
+  <h1>{{ post.titre }}</h1>
+  <img loading="lazy" src="/static/images/{{ post.image }}" alt="{{ post.titre }}" class="detail-image" width="900" height="600">
+  <p class="lead">{{ post.excerpt }}</p>
+  <div>{{ post.description | safe }}</div>
+  <a class="btn dark" href="/">Retour à l’accueil</a>
+</main>
+{% endblock %}

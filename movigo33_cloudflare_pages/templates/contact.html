@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="contenu" class="container">
+  <h1>Contact Movigo33</h1>
+  <p class="lead">Besoin d’un utilitaire ou d’un renseignement sur un produit ? Contactez Movigo33.</p>
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/merci.html">
+    <input type="hidden" name="form-name" value="contact">
+    <p class="hidden"><label>Ne pas remplir <input name="bot-field"></label></p>
+    <p><label>Nom<br><input type="text" name="nom" required autocomplete="name"></label></p>
+    <p><label>Email<br><input type="email" name="email" required autocomplete="email"></label></p>
+    <p><label>Message<br><textarea name="message" rows="6" required></textarea></label></p>
+    <button class="btn" type="submit">Envoyer</button>
+  </form>
+</main>
+{% endblock %}

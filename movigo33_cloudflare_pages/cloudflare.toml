@@ -1,0 +1,4 @@
+# Cloudflare Pages memo
+Build command: python update_index.py
+Build output directory: dist
+SITE_URL=https://movigo33.com

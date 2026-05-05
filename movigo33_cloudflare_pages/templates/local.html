@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="contenu" class="container">
+  <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> / Location utilitaire {{ ville.nom }}</nav>
+  <h1>Location utilitaire {{ ville.nom }}</h1>
+  <p class="lead">{{ ville.intro }}</p>
+  <p>Movigo33 vous aide à trouver un utilitaire adapté pour un déménagement, un transport de meubles, une livraison ponctuelle ou un besoin professionnel autour de {{ ville.nom }} et Bordeaux Métropole.</p>
+  <h2>Véhicules recommandés près de {{ ville.nom }}</h2>
+  <div class="grid">
+  {% for categorie, items in vehicules.items() %}
+    {% for v in items %}
+      <article class="card">
+        <img loading="lazy" src="/static/images/{{ v.image_file }}" alt="{{ v.nom }} à {{ v.ville }} près de {{ ville.nom }}" class="card-image" width="600" height="400">
+        <h3>{{ v.nom }}</h3>
+        <p>{{ v.ville }} · dès {{ v.prix }} €/jour</p>
+        <p class="muted">{{ v.description[:110] }}{% if v.description|length > 110 %}...{% endif %}</p>
+        <a class="btn" href="/vehicules/{{ v.slug }}.html">Voir le véhicule</a>
+      </article>
+    {% endfor %}
+  {% endfor %}
+  </div>
+  <section class="faq">
+    <h2>Questions fréquentes sur la location utilitaire à {{ ville.nom }}</h2>
+    <h3>Quel utilitaire choisir pour un déménagement ?</h3>
+    <p>Pour quelques cartons ou petits meubles, un format compact peut suffire. Pour électroménager, canapé ou gros volume, privilégiez un Boxer, Jumper ou équivalent.</p>
+    <h3>Comment réduire le coût de location ?</h3>
+    <p>Réservez tôt, choisissez un véhicule proche de votre point de départ et estimez bien le volume pour éviter les allers-retours inutiles.</p>
+    <h3>Les prix sont-ils définitifs ?</h3>
+    <p>Les tarifs affichés sont indicatifs. Le prix final dépend de la plateforme de réservation, de la durée, de la demande et des options éventuelles.</p>
+  </section>
+</main>
+{% endblock %}
