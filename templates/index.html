@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow">Bordeaux Métropole · utilitaires · déménagement · boutique pratique</p>
+      <h1>Location utilitaire à Bordeaux et véhicules proches de chez vous</h1>
+      <p>Movigo33 regroupe des utilitaires disponibles autour de Bordeaux, Talence, Bègles, Pessac et Mérignac, avec des pages locales optimisées pour comparer rapidement le véhicule adapté à un déménagement, un transport de meuble ou un besoin professionnel.</p>
+      <a class="btn secondary" href="#vehicules">Voir les véhicules</a>
+      <a class="btn" href="#local">Choisir une ville</a>
+    </div>
+    <aside class="hero-box" aria-label="Avantages Movigo33">
+      <h2>Pourquoi passer par Movigo33 ?</h2>
+      <ul class="clean-list">
+        <li>Prix indicatifs visibles avant réservation</li>
+        <li>Véhicules positionnés autour de Bordeaux</li>
+        <li>Guides pratiques pour préparer votre location</li>
+      </ul>
+      <div class="badges">
+        <span class="badge">Bordeaux</span><span class="badge">Talence</span><span class="badge">Bègles</span><span class="badge">Pessac</span><span class="badge">Mérignac</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<main id="contenu" class="container">
+  <section class="intro-seo">
+    <h2>Une solution simple pour louer un utilitaire à Bordeaux Métropole</h2>
+    <p>Vous cherchez une location utilitaire à Bordeaux pour un déménagement, transporter un canapé, récupérer un meuble ou déplacer du matériel professionnel ? Les pages Movigo33 vous aident à repérer rapidement les véhicules disponibles par ville, leur tarif indicatif et leur usage idéal.</p>
+  </section>
+
+  <section id="vehicules">
+    <h2 class="section-title">Véhicules disponibles</h2>
+    {% for categorie, items in vehicules.items() %}
+      <h3>{{ categorie | replace('_',' ') | capitalize }}</h3>
+      <div class="grid">
+        {% for v in items %}
+        <article class="card">
+          <img loading="lazy" src="/static/images/{{ v.image_file }}" alt="{{ v.nom }} disponible à {{ v.ville }}" class="card-image" width="600" height="400">
+          <h3>{{ v.nom }}</h3>
+          <p class="muted">{{ v.ville }} · {{ v.description[:120] }}{% if v.description|length > 120 %}...{% endif %}</p>
+          <p class="price">Dès {{ v.prix }} €/jour</p>
+          <a class="btn" href="/vehicules/{{ v.slug }}.html">Détails</a>
+          {% if v.url %}<a class="btn dark" target="_blank" rel="nofollow sponsored noopener" href="{{ v.url }}">Réserver</a>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </section>
+
+  <section id="local">
+    <h2 class="section-title">Location utilitaire par ville</h2>
+    <div class="grid">
+      {% for ville in villes %}
+      <article class="local-block">
+        <h3>Location utilitaire {{ ville.nom }}</h3>
+        <p>{{ ville.intro }}</p>
+        <a class="btn" href="/location-utilitaire-{{ ville.slug }}.html">Voir la page {{ ville.nom }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="boutique">
+    <h2 class="section-title">Boutique pratique</h2>
+    <p>Une sélection de produits utiles pour l’auto, la maison et les animaux, à développer progressivement avec des fiches produit plus complètes.</p>
+    {% for categorie, items in produits.items() %}
+      <h3>{{ categorie | replace('_',' ') | capitalize }}</h3>
+      <div class="grid">
+      {% for p in items %}
+        <article class="card">
+          <img loading="lazy" src="/static/images/{{ p.image_file }}" alt="{{ p.nom }} - boutique Movigo33" class="card-image" width="600" height="400">
+          <h3>{{ p.nom }}</h3>
+          <p>{{ p.description }}</p>
+          <p class="price">{{ "%.2f"|format(p.prix) }} €</p>
+          <a class="btn" href="/boutique/{{ p.slug }}.html">Voir le produit</a>
+        </article>
+      {% endfor %}
+      </div>
+    {% endfor %}
+  </section>
+
+  <section id="blog">
+    <h2 class="section-title">Conseils utiles</h2>
+    <div class="grid">
+      {% for post in posts %}
+      <article class="card">
+        <img loading="lazy" src="/static/images/{{ post.image }}" alt="{{ post.titre }}" class="card-image" width="600" height="400">
+        <h3>{{ post.titre }}</h3>
+        <p>{{ post.excerpt }}</p>
+        <a class="btn" href="/blog/{{ post.slug }}.html">Lire l’article</a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}
