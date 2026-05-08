@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://movigo33.com/sitemap.xml
