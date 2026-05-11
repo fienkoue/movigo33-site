@@ -33,6 +33,23 @@
       ],
       "url": "https://fr.getaround.com/location-voiture/begles/citroen-jumper-1677445"
     },
+	{
+	  "id": "renault-trafic-2016",
+	  "nom": "Renault Trafic 2016",
+	  "slug": "renault-trafic-2016",
+	  "ville": "Bordeaux Caudéran",
+	  "prix": 49,
+	  "image_file": "trafic.jpg",
+	  "description": "Utilitaire avec un bon volume idéal pour les déménagements, transports d’objets volumineux, trajets professionnels et besoins ponctuels autour de Mérignac et Bordeaux Métropole.",
+	  "details": [
+		"3 places",
+		"Diesel",
+		"Boîte manuelle",
+		"Bon volume de 6 m3",
+		"Idéal déménagement"
+	  ],
+	  "url": "https://fr.getaround.com/location-voiture/bordeaux/renault-trafic-1858203"
+    },
     {
       "id": "renault-kangoo-2017",
       "nom": "Renault Kangoo 2017",
@@ -65,6 +82,23 @@
         "Économique"
       ],
       "url": "https://fr.getaround.com/location-voiture/begles/suzuki-splash-1670110"
-    }
+    },
+	{
+	  "id": "toyota-aygo-2013",
+	  "nom": "Toyota Aygo 2013",
+	  "slug": "toyota-aygo-2013",
+	  "ville": "Bordeaux",
+	  "prix": 45,
+	  "image_file": "aygo.PNG",
+	  "description": "Petite citadine essence économique, pratique pour les trajets urbains, rendez-vous professionnels, déplacements ponctuels et courses autour de Bordeaux Métropole.",
+	  "details": [
+		"Essence",
+		"Citadine",
+		"Économique",
+		"4 places",
+		"Boîte automatique"
+	  ],
+	  "url": "https://fr.getaround.com/location-voiture/bordeaux/renault-trafic-1858203"
+	}
   ]
 }
