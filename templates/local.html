@@ -10,7 +10,10 @@
   {% for categorie, items in vehicules.items() %}
     {% for v in items %}
       <article class="card">
-        <img loading="lazy" src="/static/images/{{ v.image_file }}" alt="{{ v.nom }} à {{ v.ville }} près de {{ ville.nom }}" class="card-image" width="600" height="400">
+        <picture>
+          {% if v.image_webp %}<source type="image/webp" srcset="/static/images/{{ v.image_webp }}">{% endif %}
+          <img loading="lazy" decoding="async" src="/static/images/{{ v.image_file }}" alt="{{ v.nom }} à {{ v.ville }} près de {{ ville.nom }}" class="card-image" width="600" height="400">
+        </picture>
         <h3>{{ v.nom }}</h3>
         <p>{{ v.ville }} · dès {{ v.prix }} €/jour</p>
         <p class="muted">{{ v.description[:110] }}{% if v.description|length > 110 %}...{% endif %}</p>

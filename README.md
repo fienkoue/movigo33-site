@@ -13,7 +13,7 @@
 
 ## Installation
 ```bash
-py -m pip install Jinja2
+py -m pip install -r requirements.txt
 py update_index.py
 ```
 
