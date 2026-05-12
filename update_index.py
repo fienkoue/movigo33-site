@@ -19,7 +19,7 @@ SITE_NAME = "Movigo33"
 IMAGES_DIR = STATIC_DIR / "images"
 VERSION_SUFFIX_RE = re.compile(r"-v\d+$")
 
-env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True)
+env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True, trim_blocks=True, lstrip_blocks=True)
 
 def preferred_webp_filename(image_file):
     image_path = IMAGES_DIR / image_file

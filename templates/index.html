@@ -4,20 +4,32 @@
   <div class="hero-inner">
     <div>
       <p class="eyebrow">Bordeaux Métropole · utilitaires · déménagement · boutique pratique</p>
-      <h1>Location utilitaire à Bordeaux et véhicules proches de chez vous</h1>
-      <p>Movigo33 regroupe des utilitaires disponibles autour de Bordeaux, Talence, Bègles, Pessac et Mérignac, avec des pages locales optimisées pour comparer rapidement le véhicule adapté à un déménagement, un transport de meuble ou un besoin professionnel.</p>
-      <a class="btn secondary" href="#vehicules">Voir les véhicules</a>
-      <a class="btn" href="#local">Choisir une ville</a>
+      <h1>Location utilitaire à Bordeaux, simple, rapide et premium.</h1>
+      <p>Movigo33 centralise les utilitaires disponibles autour de Bordeaux, Talence, Bègles, Pessac et Mérignac pour comparer vite le bon véhicule, le tarif indicatif et l’usage adapté à votre trajet.</p>
+      <div class="hero-actions">
+        <a class="btn secondary" href="#vehicules">Voir les véhicules</a>
+        <a class="btn" href="#local">Choisir une ville</a>
+      </div>
+      <div class="hero-trust" aria-label="Points forts">
+        <span>✓ Tarifs visibles</span>
+        <span>✓ Pages locales SEO</span>
+        <span>✓ Réservation partenaire</span>
+      </div>
     </div>
     <aside class="hero-box" aria-label="Avantages Movigo33">
-      <h2>Pourquoi passer par Movigo33 ?</h2>
+      <h2>Votre location mieux préparée</h2>
       <ul class="clean-list">
-        <li>Prix indicatifs visibles avant réservation</li>
-        <li>Véhicules positionnés autour de Bordeaux</li>
-        <li>Guides pratiques pour préparer votre location</li>
+        <li>Prix indicatifs visibles avant de consulter la réservation</li>
+        <li>Véhicules positionnés autour de Bordeaux Métropole</li>
+        <li>Guides pratiques pour anticiper volume, accès et budget</li>
       </ul>
-      <div class="badges">
+      <div class="badges" aria-label="Villes couvertes">
         <span class="badge">Bordeaux</span><span class="badge">Talence</span><span class="badge">Bègles</span><span class="badge">Pessac</span><span class="badge">Mérignac</span>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>5+</strong><span>villes ciblées</span></div>
+        <div class="hero-stat"><strong>45€</strong><span>dès / jour</span></div>
+        <div class="hero-stat"><strong>24/7</strong><span>lecture rapide</span></div>
       </div>
     </aside>
   </div>
@@ -25,26 +37,44 @@
 
 <main id="contenu" class="container">
   <section class="intro-seo">
+    <p class="section-kicker">Comparateur local</p>
     <h2>Une solution simple pour louer un utilitaire à Bordeaux Métropole</h2>
     <p>Vous cherchez une location utilitaire à Bordeaux pour un déménagement, transporter un canapé, récupérer un meuble ou déplacer du matériel professionnel ? Les pages Movigo33 vous aident à repérer rapidement les véhicules disponibles par ville, leur tarif indicatif et leur usage idéal.</p>
   </section>
 
   <section id="vehicules">
+    <p class="section-kicker">Sélection véhicules</p>
     <h2 class="section-title">Véhicules disponibles</h2>
+    <p class="section-lead">Des cartes plus lisibles pour comparer immédiatement la ville, les équipements clés, le prix et le meilleur passage à l’action.</p>
     {% for categorie, items in vehicules.items() %}
-      <h3>{{ categorie | replace('_',' ') | capitalize }}</h3>
-      <div class="grid">
+      <h3 class="category-title">{{ categorie | replace('_',' ') | capitalize }}</h3>
+      <div class="grid vehicle-grid">
         {% for v in items %}
-        <article class="card">
-          <picture>
-            {% if v.image_webp %}<source type="image/webp" srcset="/static/images/{{ v.image_webp }}">{% endif %}
-            <img loading="lazy" decoding="async" src="/static/images/{{ v.image_file }}" alt="{{ v.nom }} disponible à {{ v.ville }}" class="card-image" width="600" height="400">
-          </picture>
-          <h3>{{ v.nom }}</h3>
-          <p class="muted">{{ v.ville }} · {{ v.description[:120] }}{% if v.description|length > 120 %}...{% endif %}</p>
-          <p class="price">Dès {{ v.prix }} €/jour</p>
-          <a class="btn" href="/vehicules/{{ v.slug }}.html">Détails</a>
-          {% if v.url %}<a class="btn dark" target="_blank" rel="nofollow sponsored noopener" href="{{ v.url }}">Réserver</a>{% endif %}
+        <article class="card vehicle-card">
+          <div class="card-media">
+            <div class="card-badges">
+              <span class="card-badge primary">Dès {{ v.prix }} €/jour</span>
+              <span class="card-badge">{{ v.ville }}</span>
+            </div>
+            <picture>
+              {% if v.image_webp %}<source type="image/webp" srcset="/static/images/{{ v.image_webp }}">{% endif %}
+              <img loading="lazy" decoding="async" src="/static/images/{{ v.image_file }}" alt="{{ v.nom }} disponible à {{ v.ville }}" class="card-image" width="600" height="400">
+            </picture>
+          </div>
+          <div class="card-body">
+            <h3>{{ v.nom }}</h3>
+            <p class="muted">{{ v.description[:118] }}{% if v.description|length > 118 %}...{% endif %}</p>
+            {% if v.details %}
+            <div class="vehicle-meta" aria-label="Caractéristiques principales">
+              {% for detail in v.details[:4] %}<span>{{ detail }}</span>{% endfor %}
+            </div>
+            {% endif %}
+            <p class="price">Dès {{ v.prix }} €/jour</p>
+            <div class="card-actions">
+              <a class="btn ghost" href="/vehicules/{{ v.slug }}.html">Détails</a>
+              {% if v.url %}<a class="btn" target="_blank" rel="nofollow sponsored noopener" href="{{ v.url }}">Réserver</a>{% endif %}
+            </div>
+          </div>
         </article>
         {% endfor %}
       </div>
@@ -52,34 +82,42 @@
   </section>
 
   <section id="local">
+    <p class="section-kicker">Zones desservies</p>
     <h2 class="section-title">Location utilitaire par ville</h2>
+    <p class="section-lead">Accédez directement aux pages locales pour trouver un véhicule pratique près de votre point de départ.</p>
     <div class="grid">
       {% for ville in villes %}
       <article class="local-block">
         <h3>Location utilitaire {{ ville.nom }}</h3>
         <p>{{ ville.intro }}</p>
-        <a class="btn" href="/location-utilitaire-{{ ville.slug }}.html">Voir la page {{ ville.nom }}</a>
+        <a class="btn ghost" href="/location-utilitaire-{{ ville.slug }}.html">Voir la page {{ ville.nom }}</a>
       </article>
       {% endfor %}
     </div>
   </section>
 
   <section id="boutique">
+    <p class="section-kicker">Accessoires utiles</p>
     <h2 class="section-title">Boutique pratique</h2>
-    <p>Une sélection de produits utiles pour l’auto, la maison et les animaux, à développer progressivement avec des fiches produit plus complètes.</p>
+    <p class="section-lead">Une sélection de produits utiles pour l’auto, la maison et les animaux, à développer progressivement avec des fiches produit plus complètes.</p>
     {% for categorie, items in produits.items() %}
-      <h3>{{ categorie | replace('_',' ') | capitalize }}</h3>
+      <h3 class="category-title">{{ categorie | replace('_',' ') | capitalize }}</h3>
       <div class="grid">
       {% for p in items %}
         <article class="card">
-          <picture>
-            {% if p.image_webp %}<source type="image/webp" srcset="/static/images/{{ p.image_webp }}">{% endif %}
-            <img loading="lazy" decoding="async" src="/static/images/{{ p.image_file }}" alt="{{ p.nom }} - boutique Movigo33" class="card-image" width="600" height="400">
-          </picture>
-          <h3>{{ p.nom }}</h3>
-          <p>{{ p.description }}</p>
-          <p class="price">{{ "%.2f"|format(p.prix) }} €</p>
-          <a class="btn" href="/boutique/{{ p.slug }}.html">Voir le produit</a>
+          <div class="card-media">
+            <div class="card-badges"><span class="card-badge primary">{{ "%.2f"|format(p.prix) }} €</span></div>
+            <picture>
+              {% if p.image_webp %}<source type="image/webp" srcset="/static/images/{{ p.image_webp }}">{% endif %}
+              <img loading="lazy" decoding="async" src="/static/images/{{ p.image_file }}" alt="{{ p.nom }} - boutique Movigo33" class="card-image" width="600" height="400">
+            </picture>
+          </div>
+          <div class="card-body">
+            <h3>{{ p.nom }}</h3>
+            <p>{{ p.description }}</p>
+            <p class="price">{{ "%.2f"|format(p.prix) }} €</p>
+            <div class="card-actions"><a class="btn ghost" href="/boutique/{{ p.slug }}.html">Voir le produit</a></div>
+          </div>
         </article>
       {% endfor %}
       </div>
@@ -87,17 +125,22 @@
   </section>
 
   <section id="blog">
+    <p class="section-kicker">Guides</p>
     <h2 class="section-title">Conseils utiles</h2>
     <div class="grid">
       {% for post in posts %}
       <article class="card">
-        <picture>
-          {% if post.image_webp %}<source type="image/webp" srcset="/static/images/{{ post.image_webp }}">{% endif %}
-          <img loading="lazy" decoding="async" src="/static/images/{{ post.image }}" alt="{{ post.titre }}" class="card-image" width="600" height="400">
-        </picture>
-        <h3>{{ post.titre }}</h3>
-        <p>{{ post.excerpt }}</p>
-        <a class="btn" href="/blog/{{ post.slug }}.html">Lire l’article</a>
+        <div class="card-media">
+          <picture>
+            {% if post.image_webp %}<source type="image/webp" srcset="/static/images/{{ post.image_webp }}">{% endif %}
+            <img loading="lazy" decoding="async" src="/static/images/{{ post.image }}" alt="{{ post.titre }}" class="card-image" width="600" height="400">
+          </picture>
+        </div>
+        <div class="card-body">
+          <h3>{{ post.titre }}</h3>
+          <p>{{ post.excerpt }}</p>
+          <div class="card-actions"><a class="btn ghost" href="/blog/{{ post.slug }}.html">Lire l’article</a></div>
+        </div>
       </article>
       {% endfor %}
     </div>

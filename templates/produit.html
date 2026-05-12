@@ -2,15 +2,25 @@
 {% block content %}
 <main id="contenu" class="container">
   <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> / Boutique / {{ produit.nom }}</nav>
-  <h1>{{ produit.nom }}</h1>
-  <img loading="lazy" src="/static/images/{{ produit.image_file }}" alt="{{ produit.nom }}" class="detail-image" width="900" height="600">
-  <p class="lead">{{ produit.description }}</p>
-  {% if produit.details %}
-  <h2>Points forts</h2>
-  <ul>{% for d in produit.details %}<li>{{ d }}</li>{% endfor %}</ul>
-  {% endif %}
-  <p class="price">{{ "%.2f"|format(produit.prix) }} €</p>
-  {% if produit.url %}<a class="btn" target="_blank" rel="nofollow sponsored noopener" href="{{ produit.url }}">Voir l’offre</a>{% endif %}
-  <a class="btn dark" href="/">Retour à l’accueil</a>
+  <div class="detail-hero">
+    <section>
+      <p class="section-kicker">Boutique Movigo33</p>
+      <h1>{{ produit.nom }}</h1>
+      <picture>
+        {% if produit.image_webp %}<source type="image/webp" srcset="/static/images/{{ produit.image_webp }}">{% endif %}
+        <img loading="eager" fetchpriority="high" decoding="async" src="/static/images/{{ produit.image_file }}" alt="{{ produit.nom }}" class="detail-image" width="900" height="600">
+      </picture>
+    </section>
+    <aside class="detail-panel detail-summary">
+      <p class="lead">{{ produit.description }}</p>
+      {% if produit.details %}
+      <h2>Points forts</h2>
+      <ul class="detail-list">{% for d in produit.details %}<li>{{ d }}</li>{% endfor %}</ul>
+      {% endif %}
+      <p class="price">{{ "%.2f"|format(produit.prix) }} €</p>
+      {% if produit.url %}<a class="btn" target="_blank" rel="nofollow sponsored noopener" href="{{ produit.url }}">Voir l’offre</a>{% endif %}
+      <a class="btn dark" href="/">Retour à l’accueil</a>
+    </aside>
+  </div>
 </main>
 {% endblock %}
