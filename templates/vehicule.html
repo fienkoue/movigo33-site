@@ -4,7 +4,10 @@
   <nav class="breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a> / Véhicules / {{ vehicule.nom }}</nav>
   <h1>Location {{ vehicule.nom }} à {{ vehicule.ville }}</h1>
   <p class="lead">Utilitaire ou véhicule disponible autour de Bordeaux avec réservation simple.</p>
-  <img loading="lazy" src="/static/images/{{ vehicule.image_file }}" alt="Location {{ vehicule.nom }} à {{ vehicule.ville }}" class="detail-image" width="900" height="600">
+  <picture>
+    {% if vehicule.image_webp %}<source type="image/webp" srcset="/static/images/{{ vehicule.image_webp }}">{% endif %}
+    <img loading="lazy" decoding="async" src="/static/images/{{ vehicule.image_file }}" alt="Location {{ vehicule.nom }} à {{ vehicule.ville }}" class="detail-image" width="900" height="600">
+  </picture>
   <p><strong>Tarif indicatif :</strong> dès {{ vehicule.prix }} €/jour</p>
   <p>{{ vehicule.description }}</p>
   {% if vehicule.details %}

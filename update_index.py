@@ -2,8 +2,11 @@ import os
 import json
 import shutil
 import datetime
+import re
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
+
+from generate_webp import generate_webp_images
 
 BASE_DIR = Path(__file__).parent
 TEMPLATES_DIR = BASE_DIR / "templates"
@@ -13,8 +16,43 @@ ASSETS_DIR = BASE_DIR / "assets"
 DIST_DIR = BASE_DIR / "dist"
 SITE_URL = os.environ.get("SITE_URL", "https://movigo33.com").rstrip("/")
 SITE_NAME = "Movigo33"
+IMAGES_DIR = STATIC_DIR / "images"
+VERSION_SUFFIX_RE = re.compile(r"-v\d+$")
 
 env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), autoescape=True)
+
+def preferred_webp_filename(image_file):
+    image_path = IMAGES_DIR / image_file
+    stem = image_path.stem
+    candidate_stems = [VERSION_SUFFIX_RE.sub("", stem), stem]
+
+    for candidate_stem in dict.fromkeys(candidate_stems):
+        candidate = IMAGES_DIR / f"{candidate_stem}.webp"
+        if candidate.exists():
+            return candidate.name
+    return ""
+
+def annotate_image_webp(item, image_key="image_file"):
+    image_file = item.get(image_key, "")
+    if not image_file:
+        item["image_webp"] = ""
+        return item
+
+    if not (IMAGES_DIR / image_file).exists():
+        raise FileNotFoundError(f"Image referenced by {image_key} does not exist: {image_file}")
+
+    item["image_webp"] = preferred_webp_filename(image_file)
+    return item
+
+def annotate_collection_images(collection, image_key="image_file"):
+    if isinstance(collection, dict):
+        for items in collection.values():
+            for item in items:
+                annotate_image_webp(item, image_key)
+    else:
+        for item in collection:
+            annotate_image_webp(item, image_key)
+    return collection
 
 def ensure_clean_dist():
     if DIST_DIR.exists():
@@ -60,12 +98,22 @@ def generate_sitemap(urls):
     (DIST_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
 
 def main():
+    created, skipped, failed = generate_webp_images(IMAGES_DIR, strict=False)
+    for path in created:
+        print("✅ WebP généré:", path.relative_to(BASE_DIR))
+    for path, exc in failed:
+        print(f"⚠️ WebP non généré pour {path.relative_to(BASE_DIR)}: {exc}")
+
     ensure_clean_dist()
     current_year = datetime.datetime.now().year
     vehicules = load_json("vehicules.json")
     produits = load_json("produits.json")
     villes = load_json("villes.json")
     posts = load_json("posts.json")
+
+    annotate_collection_images(vehicules)
+    annotate_collection_images(produits)
+    annotate_collection_images(posts, "image")
 
     urls = [(SITE_URL + "/", "1.0", "weekly")]
 
@@ -105,7 +153,7 @@ def main():
             "@type":"Product",
             "name":f"Location {v['nom']} à {v['ville']}",
             "description":v.get("description",""),
-            "image":f"{SITE_URL}/static/images/{v['image_file']}",
+            "image":f"{SITE_URL}/static/images/{v.get('image_webp') or v['image_file']}",
             "offers":{"@type":"Offer","price":v["prix"],"priceCurrency":"EUR","availability":"https://schema.org/InStock","url":f"{SITE_URL}/vehicules/{v['slug']}.html"}
         }
         render("vehicule.html", DIST_DIR / "vehicules" / f"{v['slug']}.html",
@@ -121,7 +169,7 @@ def main():
             "@type":"Product",
             "name":p["nom"],
             "description":p.get("description",""),
-            "image":f"{SITE_URL}/static/images/{p['image_file']}",
+            "image":f"{SITE_URL}/static/images/{p.get('image_webp') or p['image_file']}",
             "offers":{"@type":"Offer","price":p["prix"],"priceCurrency":"EUR","availability":"https://schema.org/InStock","url":f"{SITE_URL}/boutique/{p['slug']}.html"}
         }
         render("produit.html", DIST_DIR / "boutique" / f"{p['slug']}.html",
@@ -153,7 +201,7 @@ def main():
             "@type":"Article",
             "headline":post["titre"],
             "description":post.get("excerpt",""),
-            "image":f"{SITE_URL}/static/images/{post['image']}",
+            "image":f"{SITE_URL}/static/images/{post.get('image_webp') or post['image']}",
             "author":{"@type":"Organization","name":SITE_NAME},
             "publisher":{"@type":"Organization","name":SITE_NAME}
         }
