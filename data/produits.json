@@ -5,7 +5,7 @@
       "nom": "Collier anti-aboiement",
       "slug": "collier-anti-aboiement",
       "prix": 29.99,
-      "image_file": "collier-v2.jpg",
+      "image_file": "cat.jpg",
       "description": "Collier anti-aboiement rechargeable, pratique pour accompagner l'éducation du chien.",
       "details": [
         "Rechargeable USB",
@@ -21,7 +21,7 @@
       "nom": "Poubelle de papier",
       "slug": "poubelle-de-papier",
       "prix": 3.99,
-      "image_file": "trash-v2.jpg",
+      "image_file": "foots.jpg",
       "description": "Accessoire maison compact et pratique pour le bureau ou la chambre.",
       "details": [
         "Compacte",
@@ -37,7 +37,7 @@
       "nom": "Disque A jeune conducteur",
       "slug": "disque-a-jeune-conducteur",
       "prix": 2.99,
-      "image_file": "discA-v2.jpg",
+      "image_file": "cat.jpg",
       "description": "Disque A magnétique pour jeunes conducteurs.",
       "details": [
         "Magnétique",

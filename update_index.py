@@ -6,7 +6,6 @@ import re
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
-from generate_webp import generate_webp_images
 
 BASE_DIR = Path(__file__).parent
 TEMPLATES_DIR = BASE_DIR / "templates"
@@ -32,26 +31,29 @@ def preferred_webp_filename(image_file):
             return candidate.name
     return ""
 
-def annotate_image_webp(item, image_key="image_file"):
+def annotate_image_webp(item, image_key="image_file", require_exists=True):
     image_file = item.get(image_key, "")
     if not image_file:
         item["image_webp"] = ""
         return item
 
     if not (IMAGES_DIR / image_file).exists():
-        raise FileNotFoundError(f"Image referenced by {image_key} does not exist: {image_file}")
+        if require_exists:
+            raise FileNotFoundError(f"Image referenced by {image_key} does not exist: {image_file}")
+        item["image_webp"] = ""
+        return item
 
     item["image_webp"] = preferred_webp_filename(image_file)
     return item
 
-def annotate_collection_images(collection, image_key="image_file"):
+def annotate_collection_images(collection, image_key="image_file", require_exists=True):
     if isinstance(collection, dict):
         for items in collection.values():
             for item in items:
-                annotate_image_webp(item, image_key)
+                annotate_image_webp(item, image_key, require_exists)
     else:
         for item in collection:
-            annotate_image_webp(item, image_key)
+            annotate_image_webp(item, image_key, require_exists)
     return collection
 
 def ensure_clean_dist():
@@ -98,12 +100,6 @@ def generate_sitemap(urls):
     (DIST_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
 
 def main():
-    created, skipped, failed = generate_webp_images(IMAGES_DIR, strict=False)
-    for path in created:
-        print("✅ WebP généré:", path.relative_to(BASE_DIR))
-    for path, exc in failed:
-        print(f"⚠️ WebP non généré pour {path.relative_to(BASE_DIR)}: {exc}")
-
     ensure_clean_dist()
     current_year = datetime.datetime.now().year
     vehicules = load_json("vehicules.json")
@@ -112,7 +108,7 @@ def main():
     posts = load_json("posts.json")
 
     annotate_collection_images(vehicules)
-    annotate_collection_images(produits)
+    annotate_collection_images(produits, require_exists=False)
     annotate_collection_images(posts, "image")
 
     urls = [(SITE_URL + "/", "1.0", "weekly")]
