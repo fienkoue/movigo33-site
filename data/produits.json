@@ -29,6 +29,20 @@
         "Usage quotidien"
       ],
       "url": ""
+    },
+    {
+      "id": "sac-rangement",
+      "nom": "Sac de rangement sous vide",
+      "slug": "sac-de-rangement",
+      "prix": 24.99,
+      "image_file": "sacs.jpg",
+      "description": "Sac de rangement sous vide de 12 pièces pratique et efficace.",
+      "details": [
+        "Prend peu de place",
+        "Facile à prendre en main",
+        "Facilité d'usage au quotidien"
+      ],
+      "url": "https://www.amazon.fr/dp/B0DNNWN1XM?th=1"
     }
   ],
   "auto": [
