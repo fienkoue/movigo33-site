@@ -13,22 +13,15 @@
         "3 modes de correction"
       ],
       "url": "https://www.amazon.fr/dp/B0CJBXNM4F?th=1"
-    }
-  ],
-  "maison": [
+    },
     {
-      "id": "poubelle-papier",
-      "nom": "Poubelle de papier",
-      "slug": "poubelle-de-papier",
-      "prix": 3.99,
-      "image_file": "trash-v2.jpg",
-      "description": "Accessoire maison compact et pratique pour le bureau ou la chambre.",
-      "details": [
-        "Compacte",
-        "Légère",
-        "Usage quotidien"
-      ],
-      "url": "https://www.amazon.fr/dp/B0DCPDV81F?th=1"
+      "id": "cat-toys",
+      "nom": "Jouets d'intérieur pour chats",
+      "slug": "cat-toys",
+      "prix": 4.99,
+      "image_file": "cat.jpg",
+      "description": "Le kit de bâtons pour chat comprend 6 jouets avec grelots, 2 bâtons pour chat et 1 ventouse.",
+      "url": "https://www.amazon.fr/dp/B0GFN9KQ4H"
     }
   ],
   "auto": [
@@ -45,6 +38,40 @@
         "Facile à poser"
       ],
       "url": "https://www.amazon.fr/dp/B0F66GN8FD?th=1"
+    }
+  ],
+  "maison": [
+    {
+      "id": "poubelle-papier",
+      "nom": "Poubelle de papier",
+      "slug": "poubelle-de-papier",
+      "prix": 3.99,
+      "image_file": "trash-v2.jpg",
+      "description": "Accessoire maison compact et pratique pour le bureau ou la chambre.",
+      "details": [
+        "Compacte",
+        "Légère",
+        "Usage quotidien"
+      ],
+      "url": "https://www.amazon.fr/dp/B0DCPDV81F?th=1"
+    },
+    {
+      "id": "sac-rangement",
+      "nom": "Sac de rangement sous vide",
+      "slug": "sac-de-rangement",
+      "prix": 24.99,
+      "image_file": "sacs.jpg",
+      "description": "Sac de rangement sous vide de 12 pièces pratique et efficace.",
+      "url": "https://www.amazon.fr/dp/B0DNNWN1XM?th=1"
+    },
+    {
+      "id": "pied-meuble",
+      "nom": "Pied de meuble",
+      "slug": "pied-de-meuble",
+      "prix": 19.99,
+      "image_file": "foots.jpg",
+      "description": "Les pieds de meubles en bois massif peuvent être utilisés pour remplacer et augmenter la hauteur des meubles.",
+      "url": "https://www.amazon.fr/dp/B0GWJBR5W6"
     }
   ]
 }
