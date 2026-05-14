@@ -17,32 +17,18 @@
   ],
   "maison": [
     {
-      "id": "poubelle-papier",
-      "nom": "Poubelle de papier",
-      "slug": "poubelle-de-papier",
+      "id": "pied-meuble",
+      "nom": "Pied de meuble",
+      "slug": "pied-de-meuble",
       "prix": 3.99,
-      "image_file": "trash-v2.jpg",
-      "description": "Accessoire maison compact et pratique pour le bureau ou la chambre.",
+      "image_file": "foots.jpg",
+      "description": "Accessoire maison compact et pratique pour remplacer ou protéger les pieds de meuble.",
       "details": [
-        "Compacte",
-        "Légère",
+        "Compact",
+        "Facile à installer",
         "Usage quotidien"
       ],
       "url": ""
-    },
-    {
-      "id": "sac-rangement",
-      "nom": "Sac de rangement sous vide",
-      "slug": "sac-de-rangement",
-      "prix": 24.99,
-      "image_file": "sacs.jpg",
-      "description": "Sac de rangement sous vide de 12 pièces pratique et efficace.",
-      "details": [
-        "Prend peu de place",
-        "Facile à prendre en main",
-        "Facilité d'usage au quotidien"
-      ],
-      "url": "https://www.amazon.fr/dp/B0DNNWN1XM?th=1"
     }
   ],
   "auto": [
