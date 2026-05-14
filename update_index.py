@@ -108,7 +108,7 @@ def main():
     posts = load_json("posts.json")
 
     annotate_collection_images(vehicules)
-    annotate_collection_images(produits, require_exists=False)
+    annotate_collection_images(produits)
     annotate_collection_images(posts, "image")
 
     urls = [(SITE_URL + "/", "1.0", "weekly")]
