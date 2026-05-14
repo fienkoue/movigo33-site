@@ -12,8 +12,22 @@
         "Étanche IP67",
         "3 modes de correction"
       ],
-      "url": ""
-    }
+      "url": "https://www.amazon.fr/dp/B0CJBXNM4F?th=1"
+    },
+	{
+	  "id": "cat-toys",
+	  "nom": "Jouets d'intérieur pour chats",
+	  "slug": "cat-toys",
+	  "prix": 4.99,
+	  "image_file": "cat.jpg",
+	  "description": "Le kit de bâtons pour chat comprend 6 jouets avec grelots, 2 bâtons pour chat et 1 ventouse.",
+	  "details": [
+		"Très bon rapport qualité/prix",
+		"Excellent pour la santé",
+		"Absorbe l'excès d'énergie"
+	  ],
+  "url": "https://www.amazon.fr/dp/B0GFN9KQ4H"
+}
   ],
   "maison": [
     {
@@ -28,7 +42,7 @@
         "Légère",
         "Usage quotidien"
       ],
-      "url": ""
+      "url": "https://www.amazon.fr/dp/B0DCPDV81F?th=1"
     },
     {
       "id": "sac-rangement",
@@ -72,7 +86,7 @@
         "Conforme",
         "Facile à poser"
       ],
-      "url": ""
+      "url": "https://www.amazon.fr/dp/B0F66GN8FD?th=1"
     }
   ]
 }
