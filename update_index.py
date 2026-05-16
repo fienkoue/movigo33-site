@@ -3,6 +3,7 @@ import json
 import shutil
 import datetime
 import re
+from html import escape
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
@@ -70,6 +71,39 @@ def load_json(name):
 def jsonld(data):
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
+def seo_text(text, max_length=155):
+    text = re.sub(r"\s+", " ", text or "").strip()
+    if len(text) <= max_length:
+        return text
+
+    shortened = text[: max_length - 1].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    return f"{shortened}…"
+
+def image_url(item, image_key="image_file"):
+    return f"{SITE_URL}/static/images/{item.get('image_webp') or item[image_key]}"
+
+def product_schema(item, page_url, name=None, category=None, offer_url=None, item_condition="https://schema.org/NewCondition"):
+    return {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "@id": f"{page_url}#product",
+        "name": name or item["nom"],
+        "description": item.get("description", ""),
+        "image": image_url(item),
+        "sku": item.get("id") or item.get("slug"),
+        "category": category or item.get("categorie", ""),
+        "brand": {"@type": "Brand", "name": SITE_NAME},
+        "offers": {
+            "@type": "Offer",
+            "url": offer_url or page_url,
+            "price": item["prix"],
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "itemCondition": item_condition,
+            "seller": {"@type": "Organization", "name": SITE_NAME}
+        }
+    }
+
 def render(template, output, **ctx):
     defaults = {
         "site_url": SITE_URL,
@@ -95,7 +129,14 @@ def generate_sitemap(urls):
     now = datetime.date.today().isoformat()
     rows = []
     for loc, priority, changefreq in urls:
-        rows.append(f"  <url><loc>{loc}</loc><lastmod>{now}</lastmod><changefreq>{changefreq}</changefreq><priority>{priority}</priority></url>")
+        rows.append(
+            "  <url>"
+            f"<loc>{escape(loc)}</loc>"
+            f"<lastmod>{now}</lastmod>"
+            f"<changefreq>{changefreq}</changefreq>"
+            f"<priority>{priority}</priority>"
+            "</url>"
+        )
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(rows) + "\n</urlset>"
     (DIST_DIR / "sitemap.xml").write_text(xml, encoding="utf-8")
 
@@ -113,65 +154,79 @@ def main():
 
     urls = [(SITE_URL + "/", "1.0", "weekly")]
 
+    served_cities = [ville["nom"] for ville in villes]
     home_schema = {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
+        "@id": f"{SITE_URL}/#localbusiness",
         "name": SITE_NAME,
         "url": SITE_URL + "/",
-        "areaServed": ["Bordeaux", "Talence", "Bègles", "Pessac", "Mérignac"],
-        "description": "Location utilitaire à Bordeaux Métropole et sélection de produits utiles."
+        "description": "Location d’utilitaires et sélection d’accessoires pratiques pour Bordeaux Métropole.",
+        "areaServed": [
+            {"@type": "City", "name": city} for city in served_cities
+        ],
+        "knowsAbout": [
+            "location utilitaire Bordeaux",
+            "déménagement Bordeaux Métropole",
+            "location camion",
+            "accessoires pratiques"
+        ],
+        "makesOffer": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Location utilitaire à Bordeaux Métropole"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Product", "name": "Accessoires pratiques Movigo33"}}
+        ]
     }
     render("index.html", DIST_DIR / "index.html",
-        meta_title="Location utilitaire Bordeaux, Talence, Bègles | Movigo33",
-        meta_description="Location utilitaire à Bordeaux Métropole : Boxer, Jumper, Kangoo et véhicules pratiques à Talence, Bègles, Pessac et Mérignac.",
+        meta_title="Location utilitaire Bordeaux Métropole | Movigo33",
+        meta_description="Movigo33 compare utilitaires, citadines et accessoires pratiques à Bordeaux, Talence, Bègles, Pessac et Mérignac pour préparer votre trajet ou déménagement.",
         canonical_url=SITE_URL + "/", schema_json=jsonld(home_schema),
         vehicules=vehicules, produits=produits, villes=villes, posts=posts, current_year=current_year)
 
     render("contact.html", DIST_DIR / "contact.html",
-        meta_title="Contact Movigo33 - Location utilitaire Bordeaux",
-        meta_description="Contactez Movigo33 pour une location utilitaire à Bordeaux Métropole ou une question boutique.",
+        meta_title="Contact Movigo33 | Demande location ou boutique",
+        meta_description="Une question sur un utilitaire, une citadine ou un produit pratique ? Contactez Movigo33 pour préparer votre besoin à Bordeaux Métropole.",
         canonical_url=SITE_URL + "/contact.html", current_year=current_year)
     urls.append((SITE_URL + "/contact.html", "0.5", "yearly"))
 
     render("merci.html", DIST_DIR / "merci.html",
-        meta_title="Message envoyé - Movigo33",
-        meta_description="Confirmation d’envoi de message à Movigo33.",
+        meta_title="Message bien envoyé | Movigo33",
+        meta_description="Votre demande a bien été transmise à Movigo33. Nous revenons vers vous pour votre location ou votre question boutique.",
         canonical_url=SITE_URL + "/merci.html", current_year=current_year)
 
     render("404.html", DIST_DIR / "404.html",
-        meta_title="Page introuvable - Movigo33",
-        meta_description="Page introuvable sur le site Movigo33.",
+        meta_title="Page introuvable | Retour Movigo33",
+        meta_description="Cette page Movigo33 est introuvable. Retrouvez les véhicules, pages locales, conseils et produits pratiques depuis l’accueil.",
         canonical_url=SITE_URL + "/404.html", current_year=current_year)
 
     for v in flatten(vehicules):
-        schema = {
-            "@context":"https://schema.org",
-            "@type":"Product",
-            "name":f"Location {v['nom']} à {v['ville']}",
-            "description":v.get("description",""),
-            "image":f"{SITE_URL}/static/images/{v.get('image_webp') or v['image_file']}",
-            "offers":{"@type":"Offer","price":v["prix"],"priceCurrency":"EUR","availability":"https://schema.org/InStock","url":f"{SITE_URL}/vehicules/{v['slug']}.html"}
-        }
+        page_url = f"{SITE_URL}/vehicules/{v['slug']}.html"
+        schema = product_schema(
+            v,
+            page_url,
+            name=f"Location {v['nom']} à {v['ville']}",
+            category="location de véhicule",
+            offer_url=v.get("url") or page_url,
+            item_condition="https://schema.org/UsedCondition"
+        )
         render("vehicule.html", DIST_DIR / "vehicules" / f"{v['slug']}.html",
-            meta_title=f"Location {v['nom']} à {v['ville']} | Movigo33",
-            meta_description=f"Louez un {v['nom']} à {v['ville']} près de Bordeaux. Tarif indicatif dès {v['prix']} €/jour pour déménagement ou transport.",
-            canonical_url=f"{SITE_URL}/vehicules/{v['slug']}.html", og_type="product",
+            meta_title=f"Location {v['nom']} {v['ville']} dès {v['prix']} €/jour",
+            meta_description=seo_text(f"Réservez un {v['nom']} à {v['ville']} près de Bordeaux : {v['description']} Tarif indicatif dès {v['prix']} €/jour."),
+            canonical_url=page_url, og_type="product",
             schema_json=jsonld(schema), vehicule=v, current_year=current_year)
         urls.append((f"{SITE_URL}/vehicules/{v['slug']}.html", "0.8", "weekly"))
 
     for p in flatten(produits):
-        schema = {
-            "@context":"https://schema.org",
-            "@type":"Product",
-            "name":p["nom"],
-            "description":p.get("description",""),
-            "image":f"{SITE_URL}/static/images/{p.get('image_webp') or p['image_file']}",
-            "offers":{"@type":"Offer","price":p["prix"],"priceCurrency":"EUR","availability":"https://schema.org/InStock","url":f"{SITE_URL}/boutique/{p['slug']}.html"}
-        }
+        page_url = f"{SITE_URL}/boutique/{p['slug']}.html"
+        schema = product_schema(
+            p,
+            page_url,
+            category=f"boutique {p['categorie'].replace('_', ' ')}",
+            offer_url=p.get("url") or page_url
+        )
         render("produit.html", DIST_DIR / "boutique" / f"{p['slug']}.html",
-            meta_title=f"{p['nom']} | Boutique Movigo33",
-            meta_description=p.get("description", "")[:155],
-            canonical_url=f"{SITE_URL}/boutique/{p['slug']}.html", og_type="product",
+            meta_title=f"{p['nom']} dès {p['prix']:.2f} € | Boutique Movigo33",
+            meta_description=seo_text(f"Découvrez {p['nom']} dans la boutique Movigo33 : {p.get('description', '')} Prix indicatif {p['prix']:.2f} €."),
+            canonical_url=page_url, og_type="product",
             schema_json=jsonld(schema), produit=p, current_year=current_year)
         urls.append((f"{SITE_URL}/boutique/{p['slug']}.html", "0.7", "monthly"))
 
@@ -185,8 +240,8 @@ def main():
             ]
         }
         render("local.html", DIST_DIR / f"location-utilitaire-{ville['slug']}.html",
-            meta_title=f"Location utilitaire {ville['nom']} | Camion & déménagement",
-            meta_description=f"{ville['intro']} Comparez les véhicules proches, prix indicatifs et conseils pour louer à {ville['nom']}.",
+            meta_title=f"Location utilitaire {ville['nom']} | Véhicules près de Bordeaux",
+            meta_description=seo_text(f"{ville['intro']} Comparez les véhicules proches, tarifs indicatifs et conseils Movigo33 pour louer à {ville['nom']} sans perdre de temps."),
             canonical_url=f"{SITE_URL}/location-utilitaire-{ville['slug']}.html",
             schema_json=jsonld(faq_schema), ville=ville, vehicules=vehicules, current_year=current_year)
         urls.append((f"{SITE_URL}/location-utilitaire-{ville['slug']}.html", "0.9", "weekly"))
@@ -202,8 +257,8 @@ def main():
             "publisher":{"@type":"Organization","name":SITE_NAME}
         }
         render("post.html", DIST_DIR / "blog" / f"{post['slug']}.html",
-            meta_title=f"{post['titre']} | Blog Movigo33",
-            meta_description=post.get("excerpt", "")[:155],
+            meta_title=f"{post['titre']} | Conseils Movigo33",
+            meta_description=seo_text(f"{post.get('excerpt', '')} Guide pratique Movigo33 pour mieux organiser votre location, transport ou déménagement à Bordeaux."),
             canonical_url=f"{SITE_URL}/blog/{post['slug']}.html", og_type="article",
             schema_json=jsonld(schema), post=post, current_year=current_year)
         urls.append((f"{SITE_URL}/blog/{post['slug']}.html", "0.6", "monthly"))
