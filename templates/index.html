@@ -35,6 +35,23 @@
   </div>
 </section>
 
+<section class="trust-strip" aria-label="Engagements Movigo33">
+  <div class="trust-strip-inner">
+    <div class="trust-item">
+      <strong>Comparaison rapide</strong>
+      <span>Prix, ville et usage visibles d’un coup d’œil.</span>
+    </div>
+    <div class="trust-item">
+      <strong>Parcours clair</strong>
+      <span>Accès direct aux détails avant de réserver.</span>
+    </div>
+    <div class="trust-item">
+      <strong>Sélection locale</strong>
+      <span>Véhicules et produits utiles autour de Bordeaux.</span>
+    </div>
+  </div>
+</section>
+
 <main id="contenu" class="container">
   <section class="intro-seo">
     <p class="section-kicker">Comparateur local</p>
@@ -72,7 +89,7 @@
             <p class="price">Dès {{ v.prix }} €/jour</p>
             <div class="card-actions">
               <a class="btn ghost" href="/vehicules/{{ v.slug }}.html">Détails</a>
-              {% if v.url %}<a class="btn" target="_blank" rel="nofollow sponsored noopener" href="{{ v.url }}">Réserver</a>{% endif %}
+              {% if v.url %}<a class="btn btn-cta btn-reserve" target="_blank" rel="nofollow sponsored noopener" href="{{ v.url }}">Réserver</a>{% endif %}
             </div>
           </div>
         </article>
@@ -139,7 +156,7 @@
               </ul>
               {% endif %}
               <p class="price">{{ "%.2f"|format(p.prix) }} €</p>
-              <div class="card-actions"><a class="btn ghost" href="/boutique/{{ p.slug }}.html">Voir le produit</a></div>
+              <div class="card-actions"><a class="btn btn-cta btn-product" href="/boutique/{{ p.slug }}.html">Voir le produit</a></div>
             </div>
           </article>
         {% endfor %}
