@@ -244,103 +244,148 @@
     </div>
   </section>
 
-  <section id="boutique">
+  <section id="boutique" class="shop-section">
     <p class="section-kicker">Accessoires utiles</p>
     <h2 class="section-title">Boutique pratique</h2>
-    <p class="section-lead">Une sélection de produits utiles pour l’auto, la maison et les animaux, à développer progressivement avec des fiches produit plus complètes.</p>
-      <h3 class="category-title">Accessoires animaux</h3>
-      <div class="grid">
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">29.99 €</span></div>
-            <picture>
-<source type="image/webp" srcset="/static/images/collier.webp">              <img loading="lazy" decoding="async" src="/static/images/collier.webp" alt="Collier anti-aboiement - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>Collier anti-aboiement</h3>
-            <p>Collier anti-aboiement rechargeable, pratique pour accompagner l&#39;éducation du chien.</p>
-            <p class="price">29.99 €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/collier-anti-aboiement.html">Voir le produit</a></div>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">4.99 €</span></div>
-            <picture>
-              <img loading="lazy" decoding="async" src="/static/images/cat.jpg" alt="Jouets d&#39;intérieur pour chats - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>Jouets d&#39;intérieur pour chats</h3>
-            <p>Le kit de bâtons pour chat comprend 6 jouets avec grelots, 2 bâtons pour chat et 1 ventouse.</p>
-            <p class="price">4.99 €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/cat-toys.html">Voir le produit</a></div>
-          </div>
-        </article>
-      </div>
-      <h3 class="category-title">Maison</h3>
-      <div class="grid">
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">3.99 €</span></div>
-            <picture>
-<source type="image/webp" srcset="/static/images/trash.webp">              <img loading="lazy" decoding="async" src="/static/images/trash-v2.jpg" alt="Poubelle de papier - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>Poubelle de papier</h3>
-            <p>Accessoire maison compact et pratique pour le bureau ou la chambre.</p>
-            <p class="price">3.99 €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/poubelle-de-papier.html">Voir le produit</a></div>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">24.99 €</span></div>
-            <picture>
-              <img loading="lazy" decoding="async" src="/static/images/sacs.jpg" alt="Sac de rangement sous vide - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>Sac de rangement sous vide</h3>
-            <p>Sac de rangement sous vide de 12 pièces pratique et efficace.</p>
-            <p class="price">24.99 €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/sac-de-rangement.html">Voir le produit</a></div>
-          </div>
-        </article>
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">19.99 €</span></div>
-            <picture>
-              <img loading="lazy" decoding="async" src="/static/images/foots.jpg" alt="Pied de meuble - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>Pied de meuble</h3>
-            <p>Les pieds de meubles en bois massif peuvent être utilisés pour remplacer et augmenter la hauteur des meubles.</p>
-            <p class="price">19.99 €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/pied-de-meuble.html">Voir le produit</a></div>
-          </div>
-        </article>
-      </div>
-      <h3 class="category-title">Auto</h3>
-      <div class="grid">
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">2.99 €</span></div>
-            <picture>
-              <img loading="lazy" decoding="async" src="/static/images/discA-v2.jpg" alt="Disque A jeune conducteur - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>Disque A jeune conducteur</h3>
-            <p>Disque A magnétique pour jeunes conducteurs.</p>
-            <p class="price">2.99 €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/disque-a-jeune-conducteur.html">Voir le produit</a></div>
-          </div>
-        </article>
-      </div>
+    <p class="section-lead">Tous les produits disponibles sont affichés par catégorie pour comparer rapidement les accessoires auto, maison et animaux sans masquer les références ajoutées dans le catalogue.</p>
+      <section class="shop-category" aria-labelledby="boutique-accessoires_animaux">
+        <div class="shop-category-heading">
+          <h3 class="category-title" id="boutique-accessoires_animaux">Accessoires animaux</h3>
+          <span class="shop-count">2 produits</span>
+        </div>
+        <div class="grid shop-grid">
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">29.99 €</span>
+                <span class="card-badge">accessoires animaux</span>
+              </div>
+              <picture>
+<source type="image/webp" srcset="/static/images/collier.webp">                <img loading="lazy" decoding="async" src="/static/images/collier.webp" alt="Collier anti-aboiement - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Collier anti-aboiement</h3>
+              <p>Collier anti-aboiement rechargeable, pratique pour accompagner l&#39;éducation du chien.</p>
+              <ul class="shop-details" aria-label="Points forts de Collier anti-aboiement">
+<li>Rechargeable USB</li><li>Étanche IP67</li><li>3 modes de correction</li>              </ul>
+              <p class="price">29.99 €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/collier-anti-aboiement.html">Voir le produit</a></div>
+            </div>
+          </article>
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">4.99 €</span>
+                <span class="card-badge">accessoires animaux</span>
+              </div>
+              <picture>
+                <img loading="lazy" decoding="async" src="/static/images/cat.jpg" alt="Jouets d&#39;intérieur pour chats - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Jouets d&#39;intérieur pour chats</h3>
+              <p>Le kit de bâtons pour chat comprend 6 jouets avec grelots, 2 bâtons pour chat et 1 ventouse.</p>
+              <ul class="shop-details" aria-label="Points forts de Jouets d&#39;intérieur pour chats">
+<li>Très bon rapport qualité/prix</li><li>Excellent pour la santé</li><li>Absorbe l&#39;excès d&#39;énergie</li>              </ul>
+              <p class="price">4.99 €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/cat-toys.html">Voir le produit</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="shop-category" aria-labelledby="boutique-maison">
+        <div class="shop-category-heading">
+          <h3 class="category-title" id="boutique-maison">Maison</h3>
+          <span class="shop-count">3 produits</span>
+        </div>
+        <div class="grid shop-grid">
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">3.99 €</span>
+                <span class="card-badge">maison</span>
+              </div>
+              <picture>
+<source type="image/webp" srcset="/static/images/trash.webp">                <img loading="lazy" decoding="async" src="/static/images/trash-v2.jpg" alt="Poubelle de papier - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Poubelle de papier</h3>
+              <p>Accessoire maison compact et pratique pour le bureau ou la chambre.</p>
+              <ul class="shop-details" aria-label="Points forts de Poubelle de papier">
+<li>Compacte</li><li>Légère</li><li>Usage quotidien</li>              </ul>
+              <p class="price">3.99 €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/poubelle-de-papier.html">Voir le produit</a></div>
+            </div>
+          </article>
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">24.99 €</span>
+                <span class="card-badge">maison</span>
+              </div>
+              <picture>
+                <img loading="lazy" decoding="async" src="/static/images/sacs.jpg" alt="Sac de rangement sous vide - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Sac de rangement sous vide</h3>
+              <p>Sac de rangement sous vide de 12 pièces pratique et efficace.</p>
+              <ul class="shop-details" aria-label="Points forts de Sac de rangement sous vide">
+<li>Prend peu de place</li><li>Facile à prendre en main</li><li>Facilité d&#39;usage au quotidien</li>              </ul>
+              <p class="price">24.99 €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/sac-de-rangement.html">Voir le produit</a></div>
+            </div>
+          </article>
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">19.99 €</span>
+                <span class="card-badge">maison</span>
+              </div>
+              <picture>
+                <img loading="lazy" decoding="async" src="/static/images/foots.jpg" alt="Pied de meuble - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Pied de meuble</h3>
+              <p>Les pieds de meubles en bois massif peuvent être utilisés pour remplacer et augmenter la hauteur des meubles.</p>
+              <ul class="shop-details" aria-label="Points forts de Pied de meuble">
+<li>Matériau solide</li><li>Facile à installer</li><li>Large gamme d&#39;utilisations</li>              </ul>
+              <p class="price">19.99 €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/pied-de-meuble.html">Voir le produit</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="shop-category" aria-labelledby="boutique-auto">
+        <div class="shop-category-heading">
+          <h3 class="category-title" id="boutique-auto">Auto</h3>
+          <span class="shop-count">1 produit</span>
+        </div>
+        <div class="grid shop-grid">
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">2.99 €</span>
+                <span class="card-badge">auto</span>
+              </div>
+              <picture>
+                <img loading="lazy" decoding="async" src="/static/images/discA-v2.jpg" alt="Disque A jeune conducteur - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>Disque A jeune conducteur</h3>
+              <p>Disque A magnétique pour jeunes conducteurs.</p>
+              <ul class="shop-details" aria-label="Points forts de Disque A jeune conducteur">
+<li>Magnétique</li><li>Conforme</li><li>Facile à poser</li>              </ul>
+              <p class="price">2.99 €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/disque-a-jeune-conducteur.html">Voir le produit</a></div>
+            </div>
+          </article>
+        </div>
+      </section>
   </section>
 
   <section id="blog">
