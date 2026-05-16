@@ -100,8 +100,19 @@
     <p class="section-kicker">Accessoires utiles</p>
     <h2 class="section-title">Boutique pratique</h2>
     <p class="section-lead">Tous les produits disponibles sont affichés par catégorie pour comparer rapidement les accessoires auto, maison et animaux sans masquer les références ajoutées dans le catalogue.</p>
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-all" checked>
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-maison">
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-animaux">
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-auto">
+    <div class="shop-filters" role="group" aria-label="Filtrer la boutique par catégorie">
+      <label class="shop-filter-chip" for="shop-filter-all">Tous</label>
+      <label class="shop-filter-chip" for="shop-filter-maison">Maison</label>
+      <label class="shop-filter-chip" for="shop-filter-animaux">Animaux</label>
+      <label class="shop-filter-chip" for="shop-filter-auto">Auto</label>
+    </div>
+    <div class="shop-categories">
     {% for categorie, items in produits.items() %}
-      <section class="shop-category" aria-labelledby="boutique-{{ categorie }}">
+      <section class="shop-category shop-category--{{ categorie | replace('_','-') }}" aria-labelledby="boutique-{{ categorie }}">
         <div class="shop-category-heading">
           <h3 class="category-title" id="boutique-{{ categorie }}">{{ categorie | replace('_',' ') | capitalize }}</h3>
           <span class="shop-count card-badge primary">{{ items|length }} produit{% if items|length > 1 %}s{% endif %}</span>
@@ -135,6 +146,7 @@
         </div>
       </section>
     {% endfor %}
+    </div>
   </section>
 
   <section id="blog">
