@@ -237,6 +237,64 @@ footer { background: var(--ink); color: #e5e7eb; padding: 42px 20px; margin-top:
 }
 
 .shop-section { scroll-margin-top: 96px; }
+
+.shop-filter-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.shop-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 6px;
+}
+.shop-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 9px 16px;
+  border: 1px solid rgba(191, 219, 254, .78);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--primary-dark);
+  font-weight: 850;
+  font-size: .92rem;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(15,23,42,.08);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease, border-color .18s ease;
+}
+.shop-filter-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(15,23,42,.12);
+}
+#shop-filter-all:focus-visible ~ .shop-filters label[for="shop-filter-all"],
+#shop-filter-maison:focus-visible ~ .shop-filters label[for="shop-filter-maison"],
+#shop-filter-animaux:focus-visible ~ .shop-filters label[for="shop-filter-animaux"],
+#shop-filter-auto:focus-visible ~ .shop-filters label[for="shop-filter-auto"] {
+  outline: 3px solid rgba(37, 99, 235, .24);
+  outline-offset: 3px;
+}
+#shop-filter-all:checked ~ .shop-filters label[for="shop-filter-all"],
+#shop-filter-maison:checked ~ .shop-filters label[for="shop-filter-maison"],
+#shop-filter-animaux:checked ~ .shop-filters label[for="shop-filter-animaux"],
+#shop-filter-auto:checked ~ .shop-filters label[for="shop-filter-auto"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(37, 99, 235, .24);
+}
+#shop-filter-maison:checked ~ .shop-categories .shop-category,
+#shop-filter-animaux:checked ~ .shop-categories .shop-category,
+#shop-filter-auto:checked ~ .shop-categories .shop-category {
+  display: none;
+}
+#shop-filter-maison:checked ~ .shop-categories .shop-category--maison,
+#shop-filter-animaux:checked ~ .shop-categories .shop-category--accessoires-animaux,
+#shop-filter-auto:checked ~ .shop-categories .shop-category--auto {
+  display: block;
+}
 .shop-category { margin-top: 30px; }
 .shop-category-heading {
   display: flex;

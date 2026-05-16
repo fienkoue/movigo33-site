@@ -248,7 +248,18 @@
     <p class="section-kicker">Accessoires utiles</p>
     <h2 class="section-title">Boutique pratique</h2>
     <p class="section-lead">Tous les produits disponibles sont affichés par catégorie pour comparer rapidement les accessoires auto, maison et animaux sans masquer les références ajoutées dans le catalogue.</p>
-      <section class="shop-category" aria-labelledby="boutique-accessoires_animaux">
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-all" checked>
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-maison">
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-animaux">
+    <input class="shop-filter-input" type="radio" name="shop-filter" id="shop-filter-auto">
+    <div class="shop-filters" role="group" aria-label="Filtrer la boutique par catégorie">
+      <label class="shop-filter-chip" for="shop-filter-all">Tous</label>
+      <label class="shop-filter-chip" for="shop-filter-maison">Maison</label>
+      <label class="shop-filter-chip" for="shop-filter-animaux">Animaux</label>
+      <label class="shop-filter-chip" for="shop-filter-auto">Auto</label>
+    </div>
+    <div class="shop-categories">
+      <section class="shop-category shop-category--accessoires-animaux" aria-labelledby="boutique-accessoires_animaux">
         <div class="shop-category-heading">
           <h3 class="category-title" id="boutique-accessoires_animaux">Accessoires animaux</h3>
           <span class="shop-count card-badge primary">2 produits</span>
@@ -294,7 +305,7 @@
           </article>
         </div>
       </section>
-      <section class="shop-category" aria-labelledby="boutique-maison">
+      <section class="shop-category shop-category--maison" aria-labelledby="boutique-maison">
         <div class="shop-category-heading">
           <h3 class="category-title" id="boutique-maison">Maison</h3>
           <span class="shop-count card-badge primary">3 produits</span>
@@ -359,7 +370,7 @@
           </article>
         </div>
       </section>
-      <section class="shop-category" aria-labelledby="boutique-auto">
+      <section class="shop-category shop-category--auto" aria-labelledby="boutique-auto">
         <div class="shop-category-heading">
           <h3 class="category-title" id="boutique-auto">Auto</h3>
           <span class="shop-count card-badge primary">1 produit</span>
@@ -386,6 +397,7 @@
           </article>
         </div>
       </section>
+    </div>
   </section>
 
   <section id="blog">
