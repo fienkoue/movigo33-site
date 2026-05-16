@@ -104,7 +104,7 @@
       <section class="shop-category" aria-labelledby="boutique-{{ categorie }}">
         <div class="shop-category-heading">
           <h3 class="category-title" id="boutique-{{ categorie }}">{{ categorie | replace('_',' ') | capitalize }}</h3>
-          <span class="shop-count">{{ items|length }} produit{% if items|length > 1 %}s{% endif %}</span>
+          <span class="shop-count card-badge primary">{{ items|length }} produit{% if items|length > 1 %}s{% endif %}</span>
         </div>
         <div class="grid shop-grid">
         {% for p in items %}
