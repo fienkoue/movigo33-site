@@ -96,31 +96,44 @@
     </div>
   </section>
 
-  <section id="boutique">
+  <section id="boutique" class="shop-section">
     <p class="section-kicker">Accessoires utiles</p>
     <h2 class="section-title">Boutique pratique</h2>
-    <p class="section-lead">Une sélection de produits utiles pour l’auto, la maison et les animaux, à développer progressivement avec des fiches produit plus complètes.</p>
+    <p class="section-lead">Tous les produits disponibles sont affichés par catégorie pour comparer rapidement les accessoires auto, maison et animaux sans masquer les références ajoutées dans le catalogue.</p>
     {% for categorie, items in produits.items() %}
-      <h3 class="category-title">{{ categorie | replace('_',' ') | capitalize }}</h3>
-      <div class="grid">
-      {% for p in items %}
-        <article class="card">
-          <div class="card-media">
-            <div class="card-badges"><span class="card-badge primary">{{ "%.2f"|format(p.prix) }} €</span></div>
-            <picture>
-              {% if p.image_webp %}<source type="image/webp" srcset="/static/images/{{ p.image_webp }}">{% endif %}
-              <img loading="lazy" decoding="async" src="/static/images/{{ p.image_file }}" alt="{{ p.nom }} - boutique Movigo33" class="card-image" width="600" height="400">
-            </picture>
-          </div>
-          <div class="card-body">
-            <h3>{{ p.nom }}</h3>
-            <p>{{ p.description }}</p>
-            <p class="price">{{ "%.2f"|format(p.prix) }} €</p>
-            <div class="card-actions"><a class="btn ghost" href="/boutique/{{ p.slug }}.html">Voir le produit</a></div>
-          </div>
-        </article>
-      {% endfor %}
-      </div>
+      <section class="shop-category" aria-labelledby="boutique-{{ categorie }}">
+        <div class="shop-category-heading">
+          <h3 class="category-title" id="boutique-{{ categorie }}">{{ categorie | replace('_',' ') | capitalize }}</h3>
+          <span class="shop-count">{{ items|length }} produit{% if items|length > 1 %}s{% endif %}</span>
+        </div>
+        <div class="grid shop-grid">
+        {% for p in items %}
+          <article class="card shop-card">
+            <div class="card-media">
+              <div class="card-badges">
+                <span class="card-badge primary">{{ "%.2f"|format(p.prix) }} €</span>
+                <span class="card-badge">{{ categorie | replace('_',' ') }}</span>
+              </div>
+              <picture>
+                {% if p.image_webp %}<source type="image/webp" srcset="/static/images/{{ p.image_webp }}">{% endif %}
+                <img loading="lazy" decoding="async" src="/static/images/{{ p.image_file }}" alt="{{ p.nom }} - boutique Movigo33" class="card-image" width="600" height="400">
+              </picture>
+            </div>
+            <div class="card-body">
+              <h3>{{ p.nom }}</h3>
+              <p>{{ p.description }}</p>
+              {% if p.details %}
+              <ul class="shop-details" aria-label="Points forts de {{ p.nom }}">
+                {% for detail in p.details[:3] %}<li>{{ detail }}</li>{% endfor %}
+              </ul>
+              {% endif %}
+              <p class="price">{{ "%.2f"|format(p.prix) }} €</p>
+              <div class="card-actions"><a class="btn ghost" href="/boutique/{{ p.slug }}.html">Voir le produit</a></div>
+            </div>
+          </article>
+        {% endfor %}
+        </div>
+      </section>
     {% endfor %}
   </section>
 
